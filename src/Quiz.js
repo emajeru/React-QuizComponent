@@ -14,13 +14,18 @@ class Quiz extends Component {
       return { quiz_position: state.quiz_position + 1 }
     })
   }
+  handleResetClick() {
+    this.setState((state) => {
+      return { quiz_position: 1 }
+    })
+  }
   render() {
     // const isQuizEnd = false
     const isQuizEnd = ((this.state.quiz_position - 1) === quizData.quiz_questions.length)
     return (
       <div>
       { isQuizEnd
-        ? <QuizEnd is_end={isQuizEnd} />
+        ? <QuizEnd is_end={isQuizEnd} resetClickHandler={this.handleResetClick.bind(this)} />
         : <QuizQuestion quiz_question={quizData.quiz_questions[this.state.quiz_position - 1]} is_end={isQuizEnd} showNextQuestionHandler={this.showNextQuestion.bind(this)} />
       }
       </div>
